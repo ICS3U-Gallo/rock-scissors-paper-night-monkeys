@@ -29,6 +29,6 @@ arcade.draw_text("Rock Paper Scissors", HEIGHT - 700, WIDTH / 2, arcade.color.BL
 
 
 
-arcade.finish_reR03-patch-1nder()
+arcade.finish()
 
 arcade.run()
