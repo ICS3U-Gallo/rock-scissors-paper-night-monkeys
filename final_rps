@@ -1,0 +1,91 @@
+import arcade
+import random
+import math
+from random import randint
+
+WIDTH = 1365
+HEIGHT = 710
+
+# Variables
+x = 0
+y = 0
+xx = 0
+
+
+class MenuView(arcade.View):
+
+    def on_show(self):
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def draw_menu(self):
+        arcade.draw_text("-- Rock -- Paper -- Scissors --", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE,
+                         font_name="garamond", font_size=16)
+        arcade.draw_text("Press Enter To Start", HEIGHT - 105, WIDTH / 4.4, arcade.color.WHITE, font_name="garamond",
+                         font_size=10)
+        arcade.draw_text("Justin, Ethan, Mateo, Shaan", HEIGHT / 60, WIDTH / 2, arcade.color.WHITE,
+                         font_name="garamond", font_size=10)
+        arcade.draw_text("Press I for info", HEIGHT - 90, WIDTH / 4.8, arcade.color.WHITE, font_name="garamond",
+                         font_size=10)
+
+    def menu_keybinds(self, key, modifiers):
+        global current_screen
+        if key == arcade.key.I:
+            instructions_view = InstructionView()
+            self.window.show_view(instructions_view)
+        elif key == arcade.key.ENTER:
+            game_view = GameView()
+            self.window.show_view(game_view)
+        elif key == arcade.key.ESCAPE:
+            exit()
+
+
+class InstructionView(arcade.View):
+    def on_show(self):
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def on_draw(self):
+
+        arcade.draw_text("Instructions", HEIGHT / 60, WIDTH / 2, arcade.color.WHITE, font_name="garamond", font_size=10)
+        arcade.draw_xywh_rectangle_outline(510, 260, 100, 100, arcade.color.WHITE)
+        arcade.draw_text("R", HEIGHT - 155, WIDTH / 4.5, arcade.color.WHITE, font_name="garamond", font_size=10)
+        arcade.draw_xywh_rectangle_outline(630, 260, 100, 100, arcade.color.WHITE)
+        arcade.draw_text("P", HEIGHT - 34, WIDTH / 4.5, arcade.color.WHITE, font_name="garamond", font_size=10)
+        arcade.draw_xywh_rectangle_outline(750, 260, 100, 100, arcade.color.WHITE)
+        arcade.draw_text("S", HEIGHT + 85, WIDTH / 4.5, arcade.color.WHITE, font_name="garamond", font_size=10)
+        arcade.draw_text("Select from the keys:", HEIGHT - 105, WIDTH / 3.6, arcade.color.WHITE, font_name="garamond",
+                         font_size=14)
+        arcade.draw_text("Press ESC to go back", HEIGHT + 525, WIDTH / 2, arcade.color.WHITE, font_name="garamond",
+                         font_size=10)
+
+    def instructions_keybinds(self, key, modifiers):
+        global current_screen
+        if key == arcade.key.ESCAPE:
+            menu_view = MenuView()
+            self.show_view(menu_view)
+
+
+
+
+class GameView(arcade.View):
+
+    def on_show(self):
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def draw_play(self):
+        arcade.draw_text("Choose your move", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond",
+                         font_size=16)
+
+
+
+
+
+
+def main():
+    window = arcade.Window(WIDTH, HEIGHT, "Rock, Paper, Scissors")
+    window.total_score = 0
+    menu_view = MenuView()
+    window.show_view(menu_view)
+    arcade.run()
+
+if __name__ == "__main__":
+    main()
