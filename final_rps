@@ -63,8 +63,9 @@ class InstructionView(arcade.View):
             menu_view = MenuView()
             self.show_view(menu_view)
 
-
-
+    def on_mouse_press(self, x, y, button, modifiers):
+        game_view = GameView()
+        self.window.show_view(game_view)
 
 class GameView(arcade.View):
 
@@ -75,6 +76,38 @@ class GameView(arcade.View):
         arcade.draw_text("Choose your move", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond",
                          font_size=16)
 
+        t = ["Rock", "Paper", "Scissors"]
+        player = input("")
+        computer = random.choice(t)
+        player = False
+        while player == False:
+            print("Loop")
+            if player == computer:
+                arcade.draw_text("TIE", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond", font_size=16)
+            elif player == "Rock":
+                if computer == "Paper":
+                    arcade.draw_text("YOU LOSE", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond",
+                                     font_size=16)
+                else:
+                    arcade.draw_text("YOU WIN", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond",
+                                     font_size=16)
+            elif player == "Paper":
+                if computer == "Scissors":
+                    arcade.draw_text("YOU LOSE", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond",
+                                     font_size=16)
+                else:
+                    arcade.draw_text("YOU WIN", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond",
+                                     font_size=16)
+            elif player == "Scissors":
+                if computer == "Rock":
+                    arcade.draw_text("YOU LOSE", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond",
+                                     font_size=16)
+                else:
+                    arcade.draw_text("YOU WIN", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond",
+                                     font_size=16)
+            else:
+                arcade.draw_text("INVALID PLAY", HEIGHT - 180, WIDTH / 4, arcade.color.WHITE, font_name="garamond",
+                                 font_size=16)
 
 
 
